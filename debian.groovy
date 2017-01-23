@@ -108,8 +108,8 @@ def buildSourceGbp(dir, image="debian:sid", snapshot=false) {
                     NEW_VERSION=\$VERSION+\$TIMESTAMP.`git rev-parse --short HEAD`
                 } &&
                 gbp dch --auto --multimaint-merge --ignore-branch --new-version=\$NEW_VERSION --distribution `lsb_release -c -s` --force-distribution &&
-                git config --global user.name "Jenkins" &&
-                git config --global user.email "jenkins@`hostname`" &&
+                git config user.name "Jenkins" &&
+                git config user.email "jenkins@`hostname`" &&
                 git add -u debian/changelog && git commit -m "New snapshot version \$NEW_VERSION"
             ) &&
             gbp buildpackage -nc --git-force-create --git-notify=false --git-ignore-branch --git-ignore-new --git-verbose --git-export-dir=../build-area -S -uc -us'""")
